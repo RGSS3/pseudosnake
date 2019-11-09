@@ -1,6 +1,7 @@
 
-def lam(f):
+def lam(f, locals = None):
     x = { name : value.cell_contents  for name, value in zip(f.__code__.co_freevars, list(f.__closure__ or []))}
+    x.update(locals or {})
     g = dict(f.__globals__ or {})
     g.update(x)
     x['__lam__'] = []
